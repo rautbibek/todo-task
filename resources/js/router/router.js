@@ -39,9 +39,9 @@ const routes = [
                 component: () => import("../pages/Dashboard.vue"),
             },
             {
-                path: "/register",
-                name: "Register",
-                component: () => import("../pages/Register.vue"),
+                path: "/project/:id/task",
+                name: "Task",
+                component: () => import("../pages/Task.vue"),
             },
         ],
     },

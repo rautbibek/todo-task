@@ -231,10 +231,16 @@ export default {
         const menus = ref([
             {
                 icon: "dashboard",
-                text: "Dashboard",
+                text: "Boards",
                 path: "/",
                 permissions: true,
             },
+            // {
+            //     icon: "list",
+            //     text: "Task",
+            //     path: "/project/:id/board",
+            //     permissions: true,
+            // },
         ]);
         // const store = useStore();
 

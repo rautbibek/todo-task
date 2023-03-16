@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\CardController;
+use App\Http\Controllers\api\ProjectController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\auth\AuthController;
 use Illuminate\Http\Request;
@@ -20,4 +22,14 @@ Route::post('login',[AuthController::class,'login']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('logout',[AuthController::class,'logout']);
     Route::get('/auth/user',[UserController::class,'authUser']);
+
+    Route::group(['prefix'=>'project'], function(){
+        Route::get('/',[ProjectController::class,'myProjects']);
+        Route::post('/store',[ProjectController::class,'store']);
+    });
+
+    Route::group(['prefix'=>'card'], function(){
+        //Route::get('/',[ProjectController::class,'myProjects']);
+        Route::post('/store',[CardController::class,'store']);
+    });
 });

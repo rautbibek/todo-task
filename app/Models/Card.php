@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Card extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'name','visibility','user_id'
-    ];
 }

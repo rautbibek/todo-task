@@ -1,43 +1,14 @@
 <template>
     <div>
-        <h6 style="padding: 0px; margin: 0px">My Projects</h6>
-        <div class="">
-            <div class="row q-gutter-md">
-                <div
-                    class="col-md-3 col-sm-6 col-xs-12 col-lg-3 q-mt-lg"
-                    v-for="project in projects"
-                >
-                    <q-card
-                        flat
-                        bordered
-                        class="my-card"
-                        @click="gotoTask(project.id)"
-                    >
-                        <q-card-section>
-                            <div class="text-h6 q-mt-sm q-mb-xs">
-                                {{ project.name }}
-                            </div>
-                            <div class="text-overline text-orange-9">
-                                {{ project.visibility ? "Public" : "Private" }}
-                            </div>
-                        </q-card-section>
-                    </q-card>
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12 col-lg-3 q-mt-lg">
-                    <q-card flat bordered class="my-card add-new text-dark">
-                        <q-card-section>
-                            <q-btn
-                                @click="addNewProject"
-                                round
-                                color="primary"
-                                outline=""
-                                icon="add"
-                            />
-                        </q-card-section>
-                    </q-card>
-                </div>
-                <!-- <div class="col-3 col-md-3 q-mt-lg">
+        <div class="header">
+            <h6 style="margin: 0px">Project Name</h6>
+            <q-btn color="primary" size="small" @click="addNewCard">
+                <q-icon name="add" left></q-icon>add new card</q-btn
+            >
+        </div>
+        <div class="wrapper">
+            <div class="scrolls">
+                <div class="">
                     <q-card flat bordered class="my-card add-new text-dark">
                         <q-card-section>
                             <q-btn
@@ -49,7 +20,7 @@
                         </q-card-section>
                     </q-card>
                 </div>
-                <div class="col-3 col-md-3 q-mt-lg">
+                <div class="">
                     <q-card flat bordered class="my-card add-new text-dark">
                         <q-card-section>
                             <q-btn
@@ -61,7 +32,7 @@
                         </q-card-section>
                     </q-card>
                 </div>
-                <div class="col-3 col-md-3 q-mt-lg">
+                <div class="">
                     <q-card flat bordered class="my-card add-new text-dark">
                         <q-card-section>
                             <q-btn
@@ -72,10 +43,82 @@
                             />
                         </q-card-section>
                     </q-card>
-                </div> -->
+                </div>
+                <div class="">
+                    <q-card flat bordered class="my-card add-new text-dark">
+                        <q-card-section>
+                            <q-btn
+                                round
+                                color="primary"
+                                outline=""
+                                icon="add"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </div>
+                <div class="">
+                    <q-card flat bordered class="my-card add-new text-dark">
+                        <q-card-section>
+                            <q-btn
+                                round
+                                color="primary"
+                                outline=""
+                                icon="add"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </div>
+                <div class="">
+                    <q-card flat bordered class="my-card add-new text-dark">
+                        <q-card-section>
+                            <q-btn
+                                round
+                                color="primary"
+                                outline=""
+                                icon="add"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </div>
+                <div class="">
+                    <q-card flat bordered class="my-card add-new text-dark">
+                        <q-card-section>
+                            <q-btn
+                                round
+                                color="primary"
+                                outline=""
+                                icon="add"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </div>
+                <div class="">
+                    <q-card flat bordered class="my-card add-new text-dark">
+                        <q-card-section>
+                            <q-btn
+                                round
+                                color="primary"
+                                outline=""
+                                icon="add"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </div>
+                <div class="">
+                    <q-card flat bordered class="my-card add-new text-dark">
+                        <q-card-section>
+                            <q-btn
+                                round
+                                color="primary"
+                                outline=""
+                                icon="add"
+                            />
+                        </q-card-section>
+                    </q-card>
+                </div>
             </div>
         </div>
-        <q-dialog v-model="add_project_model">
+        <q-dialog v-model="add_new_card">
             <q-card>
                 <q-form
                     @submit="onSubmit"
@@ -84,7 +127,7 @@
                     ref="form"
                 >
                     <q-card-section>
-                        <div class="text-h6">Add new project</div>
+                        <div class="text-h6">Add new card</div>
                     </q-card-section>
 
                     <q-separator />
@@ -97,19 +140,14 @@
                             outlined
                             dense
                             v-model="formData.name"
-                            label="Project Name*"
+                            label="Card Name*"
                             lazy-rules
                             class="q-mb-md"
                             :rules="[
                                 (val) =>
                                     (val && val.length > 0) ||
-                                    'Please type something',
+                                    'card name required',
                             ]"
-                        />
-
-                        <q-toggle
-                            v-model="formData.visibility"
-                            label="Visibility"
                         />
                     </q-card-section>
 
@@ -120,7 +158,7 @@
                             color="red"
                             outlined
                             class="q-mr-sm"
-                            @click="add_project_model = !add_project_model"
+                            @click="add_new_card = !add_new_card"
                             ><q-icon small name="close" left> </q-icon>
                             Cancel</q-btn
                         >
@@ -140,71 +178,33 @@
 </template>
 
 <script setup>
-import { useQuasar } from "quasar";
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import axiosClient from "../interceptor/axios";
-const add_project_model = ref(false);
-const loading = ref(false);
-const router = useRouter();
-const form = ref(null);
-const projects = ref({});
-const $q = useQuasar();
-const formData = ref({
-    name: "",
-    visibility: false,
-});
-function addNewProject() {
-    add_project_model.value = true;
-}
-function onSubmit() {
-    loading.value = true;
-    form.value.validate().then((success) => {
-        if (success) {
-            axiosClient
-                .post("/project/store", formData.value)
-                .then((res) => {
-                    loading.value = false;
-                    add_project_model.value = false;
-                    getProjectData();
-                })
-                .catch((error) => {
-                    loading.value = false;
-                });
-        }
-        loading.value = false;
-    });
-}
-function getProjectData() {
-    $q.loading.show();
-    axiosClient
-        .get("project")
-        .then((res) => {
-            console.log(res.data);
-            projects.value = res.data.projects;
-            $q.loading.hide();
-        })
-        .catch((error) => {
-            console.log(error);
-            $q.loading.hide();
-        });
-}
-getProjectData();
 
-function gotoTask(id) {
-    router.push({ name: "Task", params: { id: id } });
+const loading = ref(false);
+const add_new_card = ref(false);
+const formData = ref({});
+function addNewCard() {
+    add_new_card.value = !add_new_card.value;
 }
 </script>
 
 <style lang="scss" scoped>
+.scrolls {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+    gap: 20px;
+}
 .my-card {
-    width: 100%;
-    min-height: 120px;
+    width: 290px;
+    min-height: 100px;
     cursor: pointer;
 }
-.add-new {
+.header {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 </style>
