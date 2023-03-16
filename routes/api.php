@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\CardController;
 use App\Http\Controllers\api\ProjectController;
+use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\auth\AuthController;
 use Illuminate\Http\Request;
@@ -29,7 +30,12 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::group(['prefix'=>'card'], function(){
-        //Route::get('/',[ProjectController::class,'myProjects']);
+        Route::get('/{project_id}',[CardController::class,'getCard']);
         Route::post('/store',[CardController::class,'store']);
+    });
+
+    Route::group(['prefix'=>'task'], function(){
+        //Route::get('/{project_id}',[CardController::class,'getCard']);
+        Route::post('/store',[TaskController::class,'store']);
     });
 });

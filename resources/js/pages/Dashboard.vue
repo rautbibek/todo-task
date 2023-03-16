@@ -10,6 +10,7 @@
                     <q-card
                         flat
                         bordered
+                        clickable
                         class="my-card"
                         @click="gotoTask(project.id)"
                     >

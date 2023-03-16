@@ -4,11 +4,21 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
+    public function getCard($project_id){
+        $project = Project::findOrFail($project_id);
+        $card = Card::with('tasks')->where('project_id',$project_id)->get();
+        return response()->json([
+            'cards'=>$card,
+            'project'=>$project,
+        ]);
+    }
     public function store(Request $request){
+        //return $request->all();
         $this->validate($request,[
             'title'=>'required|max:100'
         ]);
@@ -20,15 +30,20 @@ class CardController extends Controller
         $id = $request->id;
         if(isset($id)){
             Card::updated([
-                'name'=>$request->title,
+                'title'=>$request->title,
                 'order'=>$order
             ]);
         }else{
             Card::create([
-                'name'=>$request->title,
+                'user_id'=>auth()->id(),
+                'project_id'=>$request->project_id,
+                'title'=>$request->title,
                 'order'=>$order
 
             ]);
         }
+        return response()->json([
+            'message'=>'card updated successfully'
+        ]);
     }
 }
