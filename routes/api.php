@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::group(['prefix'=>'task'], function(){
-        //Route::get('/{project_id}',[CardController::class,'getCard']);
+        Route::put('/update-moved-card-order',[TaskController::class,'updateOrderOnMove']);
         Route::post('/store',[TaskController::class,'store']);
     });
 });

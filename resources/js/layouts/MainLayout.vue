@@ -231,7 +231,7 @@ export default {
         const menus = ref([
             {
                 icon: "dashboard",
-                text: "Boards",
+                text: "Projects",
                 path: "/",
                 permissions: true,
             },

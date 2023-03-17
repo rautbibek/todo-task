@@ -11,7 +11,9 @@ class CardController extends Controller
 {
     public function getCard($project_id){
         $project = Project::findOrFail($project_id);
-        $card = Card::with('tasks')->where('project_id',$project_id)->get();
+        $card = Card::with(['tasks'=>function($query){
+            $query->orderBy('order','asc');
+        }])->where('project_id',$project_id)->get();
         return response()->json([
             'cards'=>$card,
             'project'=>$project,

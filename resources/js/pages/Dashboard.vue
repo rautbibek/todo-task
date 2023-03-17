@@ -121,7 +121,7 @@
                             color="red"
                             outlined
                             class="q-mr-sm"
-                            @click="add_project_model = !add_project_model"
+                            @click="closeModel"
                             ><q-icon small name="close" left> </q-icon>
                             Cancel</q-btn
                         >
@@ -155,6 +155,10 @@ const formData = ref({
     name: "",
     visibility: false,
 });
+function closeModel() {
+    add_project_model.value = false;
+    formData.value = {};
+}
 function addNewProject() {
     add_project_model.value = true;
 }
@@ -167,6 +171,7 @@ function onSubmit() {
                 .then((res) => {
                     loading.value = false;
                     add_project_model.value = false;
+                    formData.value = {};
                     getProjectData();
                 })
                 .catch((error) => {
