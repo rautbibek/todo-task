@@ -21,7 +21,7 @@
                     icon="home"
                 />
                 <q-btn
-                    @click="goBack"
+                    @click="gotoHome"
                     outline
                     class="q-ml-md"
                     unelevated

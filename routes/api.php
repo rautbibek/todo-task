@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::group(['prefix'=>'project'], function(){
         Route::get('/',[ProjectController::class,'myProjects']);
         Route::post('/store',[ProjectController::class,'store']);
+        Route::delete('/{id}/delete',[ProjectController::class,'delete']);
     });
 
     Route::group(['prefix'=>'card'], function(){

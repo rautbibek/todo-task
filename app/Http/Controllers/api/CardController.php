@@ -11,6 +11,11 @@ class CardController extends Controller
 {
     public function getCard($project_id){
         $project = Project::findOrFail($project_id);
+        if($project->user_id !=auth()->id()){
+            return response()->json([
+                'message'=>'Unauthorized access'
+            ],403);
+        }
         $card = Card::with(['tasks'=>function($query){
             $query->orderBy('order','asc');
         }])->where('project_id',$project_id)->get();

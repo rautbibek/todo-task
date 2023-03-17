@@ -20,7 +20,7 @@ class ProjectController extends Controller
         $id= $request->id;
         $message = "";
         if(isset($id)){
-            Project::updated([
+            Project::findOrFail($id)->update([
                 'name'=> $request->name,
                 'visibility'=>$request->visibility
             ]);
@@ -36,5 +36,18 @@ class ProjectController extends Controller
         return response()->json([
             'message'=>$message
         ],200);
+    }
+
+    public function delete($id){
+        $projects = Project::findOrFail($id);
+        if($projects->user_id != auth()->id()){
+            return response()->json([
+                'message'=>'Unauthorized Access'
+            ],403);
+        }
+        $projects->delete();
+        return response()->json([
+            'message'=>'Project removed successfully.'
+        ]);
     }
 }

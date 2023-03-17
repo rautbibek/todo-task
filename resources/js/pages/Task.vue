@@ -263,6 +263,7 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axiosClient from "../interceptor/axios";
 import draggable from "vuedraggable";
+import { useQuasar } from "quasar";
 const loading = ref(false);
 const add_new_card = ref(false);
 const taskData = ref({});
@@ -311,19 +312,24 @@ function onSubmit() {
         loading.value = false;
     });
 }
+const $q = useQuasar();
 function getProjectCards() {
+    $q.loading.show();
     axiosClient
         .get(`/card/${route.params.id}`)
         .then((res) => {
             cards.value = res.data.cards;
             project.value = res.data.project;
+            $q.loading.hide();
         })
         .catch((error) => {
             console.log(error);
+            $q.loading.hide();
         });
 }
 getProjectCards();
 function addNewTask(id) {
+    edit_action.value = false;
     task_modal.value = true;
     card_id.value = id;
 }
@@ -352,6 +358,7 @@ function storeTask() {
                     loading.value = false;
                     task_modal.value = false;
                     taskData.value = {};
+                    edit_action.value = false;
                     getProjectCards();
                 })
                 .catch((error) => {
