@@ -31,17 +31,18 @@ step 2: setup env file
 
 1.  rename .env.example to .env
 2.  put appropriate configuration to .env file for eg.
-    APP_NAME=project_name
 
-    APP_URL=http://localhost:8000
-    VITE_BASE_URL=http://localhost:8000/api
+    -   APP_NAME=project_name
 
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=database_name
-    DB_USERNAME=database_username
-    DB_PASSWORD=database_password
+    -   APP_URL=http://localhost:8000
+    -   VITE_BASE_URL=http://localhost:8000/api
+
+    -   DB_CONNECTION=mysql
+    -   DB_HOST=127.0.0.1
+    -   DB_PORT=3306
+    -   DB_DATABASE=database_name
+    -   DB_USERNAME=database_username
+    -   DB_PASSWORD=database_password
 
 3.  hit command
     php artisan key:generate
