@@ -63,14 +63,14 @@ commands :
 
 some default users list after seeding data into users table
 
-username : test@test.com
-password : password
+-   username : test@test.com
+-   password : password
 
-username : admin@admin.com
-password : password
+-   username : admin@admin.com
+-   password : password
 
-username : creator@creator.com
-password : password
+-   username : creator@creator.com
+-   password : password
 
-username : writer@writer.com
-password : password
+-   username : writer@writer.com
+-   password : password
