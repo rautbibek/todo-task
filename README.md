@@ -4,12 +4,12 @@ Task management project with some basic drag and drop functionality.
 
 Library and Framwork used in this project
 
-Framwork
+# Framwork
 
 -   Laravel
 -   Vuejs with vite
 
-Library
+# Library
 
 -   Quasar
 -   axios
@@ -27,7 +27,7 @@ step 1: install dependencies using follwing command
 1.  composer install
 2.  npm install
 
-step 2: setup env file
+# step 2: setup env file
 
 1.  rename .env.example to .env
 2.  put appropriate configuration to .env file for eg.
@@ -45,7 +45,7 @@ step 2: setup env file
     -   DB_PASSWORD=database_password
 
 3.  hit command
-    php artisan key:generate
+    -   php artisan key:generate
 
 step 2 : start laravel and vite server in terminal
 
@@ -74,3 +74,5 @@ some default users list after seeding data into users table
 
 -   username : writer@writer.com
 -   password : password
+
+Password for all seeded usera is 'password'
